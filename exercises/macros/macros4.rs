@@ -1,12 +1,13 @@
 // macros4.rs
 // Make me compile! Execute `rustlings hint macros4` for hints :)
 
-// I AM NOT DONE
 
+#[macro_export]
 macro_rules! my_macro {
     () => {
         println!("Check out my macro!");
-    }
+    };
+    //中间需要加分号，结尾可以不要
     ($val:expr) => {
         println!("Look at this other macro: {}", $val);
     }
