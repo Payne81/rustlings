@@ -1,8 +1,18 @@
 // iterators4.rs
 
-// I AM NOT DONE
 
+
+/**
+ * iter.fold()!!!!!!!!!
+ * */
 pub fn factorial(num: u64) -> u64 {
+    /* return 1
+    let mut ans = 1;
+    (1..num+1).into_iter().map(|x| {ans = ans*x;});
+    ans
+    */
+    (1..num+1).into_iter().fold(1,|acc,x| acc*x)
+
     // Complete this function to return the factorial of num
     // Do not use:
     // - return

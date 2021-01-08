@@ -8,13 +8,18 @@
 // which appends "Bar" to any object
 // implementing this trait.
 
-// I AM NOT DONE
 
 trait AppendBar {
     fn append_bar(self) -> Self;
 }
 
+/** 
+ * 这里Self可视为String 详见std文档
+ **/
 impl AppendBar for String {
+    fn append_bar(self) -> Self {
+        format!("{}{}",self,"Bar")
+    }
     //Add your code here
 }
 

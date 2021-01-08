@@ -7,8 +7,6 @@
 // Execute `rustlings hint iterators3` to get some hints!
 // Have fun :-)
 
-// I AM NOT DONE
-
 #[derive(Debug, PartialEq, Eq)]
 pub enum DivisionError {
     NotDivisible(NotDivisibleError),
@@ -72,8 +70,13 @@ mod tests {
     #[test]
     fn result_with_list() {
         let numbers = vec![27, 297, 38502, 81];
+        // divide本身就返回Result，所以最后一个测试是通过不了的 
         let division_results = numbers.into_iter().map(|n| divide(n, 27));
-        let x: Result<Vec<i32>, DivisionError> = Ok(division_results.collect()::<Vec<_>>());//... Fill in here!
+        // collect()可以由iter建立Result<collecttion<T>,E>或者collection<Result<T,E>>
+        // 所以调用时需要声明collect所需要的结果（指定类型）
+        // 指定类型的方式如下
+        // collect还可以将char iter 通过collect转化为String
+        let x = division_results.collect::<Result<Vec<i32>, DivisionError>>();//... Fill in here!
         assert_eq!(format!("{:?}", x), "Ok([1, 11, 1426, 3])");
     }
 
@@ -83,6 +86,14 @@ mod tests {
         let division_results = numbers.into_iter().map(|n| divide(n, 27));
         let x: Vec<_> = division_results.collect();//... Fill in here!
         assert_eq!(format!("{:?}", x), "[Ok(1), Ok(11), Ok(1426), Ok(3)]");
+    }
+    #[test]
+    fn list_of_results_addbypayne() {
+        let numbers = vec![27, 297, 38502, 81];
+        let division_results = numbers.into_iter().map(|n| divide(n, 27));
+        // !error
+        //let x: Vec<i32> = division_results.collect();//... Fill in here!
+        //assert_eq!(format!("{:?}", x), "[1,11,1426,3]");
     }
     
 }
