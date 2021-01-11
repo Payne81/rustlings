@@ -33,10 +33,32 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of Person
 // Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        if s.len() == 0 {
+            return Person::default();
+        }
+        // 返回一个&str类型的迭代器、其中不包含","
+        let mut split  =s.split(",");
+        // 通过match得到一个&str类型
+        let name: &str= match split.next() {
+            Some(name)  => name,
+            _           => return Person::default(),
+        };
+        if name.len() == 0 {
+            return Person::default();
+        }
+        let age_str = match split.next() {
+            Some(age_str)   => age_str,
+            None            => return Person::default(),
+        };
+
+        let age = age_str.parse::<usize>();
+        match age {
+            Ok(age) => return Person{name: String::from(name),age: age},
+            _       => return Person::default(),
+        }
     }
 }
 
